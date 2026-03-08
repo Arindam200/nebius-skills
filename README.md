@@ -4,13 +4,12 @@ A collection of agent skills for [Claude](https://claude.ai) (and compatible AI 
 
 Each skill is a `SKILL.md` file loaded into an AI agent's context, giving it precise knowledge of Nebius APIs, correct endpoints, and working code patterns.
 
----
+Run this command to start using the skills:
 
-## Why these skills exist
+```bash
+npx skills add github.com/Arindam200/nebius-skills
+```
 
-Without them, AI assistants routinely hallucinate the wrong Nebius API URLs, use incorrect SDK methods, or miss Nebius-specific patterns (like `lora_rank`, `routing_key`, or the `v0/models` deploy endpoint). With them, Claude answers at **~97% accuracy** on Nebius tasks vs ~58% baseline. See [`evals/`](./evals/) for the full benchmark data.
-
----
 
 ## Skills
 
@@ -31,7 +30,7 @@ Without them, AI assistants routinely hallucinate the wrong Nebius API URLs, use
 
 1. Clone this repo:
    ```bash
-   git clone https://github.com/your-org/nebius-skills.git
+   git clone https://github.com/Arindam200/nebius-skills.git
    ```
 2. In Cursor, open **Settings → Features → Cursor Skills** and add the path to a `SKILL.md` file — e.g., `nebius-skills/skills/nebius-finetune/SKILL.md`.
 3. The skill is now active. Ask Claude anything about fine-tuning on Nebius and it will automatically load the skill.
