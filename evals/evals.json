@@ -1,0 +1,77 @@
+{
+  "skill_name": "nebius-skills",
+  "evals": [
+    {
+      "id": 0,
+      "skill": "nebius-finetune",
+      "prompt": "I have a customer support JSONL dataset (~500 examples) and I want to train a Llama 3.1 8B model on Nebius Token Factory to specialize it for my product. How do I upload the data and start a LoRA fine-tuning job?",
+      "expected_output": "Step-by-step code using OpenAI client pointed at Nebius, uploading JSONL with purpose='fine-tune', creating job with lora_rank hyperparameter, and polling status."
+    },
+    {
+      "id": 1,
+      "skill": "nebius-finetune",
+      "prompt": "My fine-tuning job ftjob-abc123 on Nebius has been running for a few hours. How do I stream the events to see what's happening and then download the checkpoints once it succeeds?",
+      "expected_output": "Code to list_events polling loop, check job status transitions, then checkpoints.list and files.content to save checkpoint files."
+    },
+    {
+      "id": 2,
+      "skill": "nebius-dedicated-endpoint",
+      "prompt": "I need to set up an isolated GPT-OSS-20B endpoint on Nebius in eu-west1 that auto-scales between 2 and 5 replicas. Walk me through the API calls to create it, wait for it to be ready, and run a test inference.",
+      "expected_output": "Code using requests against /v0/dedicated_endpoints, correct payload with template/flavor/region/scaling, polling for ready status, then OpenAI client with eu-west1 inference base URL and routing_key."
+    },
+    {
+      "id": 3,
+      "skill": "nebius-dedicated-endpoint",
+      "prompt": "Traffic spiked on my Nebius dedicated endpoint (endpoint_id=ep-xyz789). I need to increase max_replicas to 8 without redeploying. How do I do a live patch?",
+      "expected_output": "PATCH request to /v0/dedicated_endpoints/{id} with scaling.max_replicas=8, correct auth header."
+    },
+    {
+      "id": 4,
+      "skill": "nebius-observability",
+      "prompt": "I want to monitor p95 time-to-first-token and requests per minute for my Nebius Token Factory inference programmatically. We already use Grafana. What's the setup?",
+      "expected_output": "PromQL queries for histogram_quantile p95 TTFT, rate() for rpm, plus Grafana datasource JSON with the monitoring URL and bearer token."
+    },
+    {
+      "id": 5,
+      "skill": "nebius-observability",
+      "prompt": "How do I set up Prometheus to scrape Nebius Token Factory metrics? I need a prometheus.yml config and to know what URL and auth to use.",
+      "expected_output": "Complete prometheus.yml with correct metrics_path including project ID, bearer_token auth, and 15s scrape_interval guidance."
+    },
+    {
+      "id": 6,
+      "skill": "nebius-deploy-lora",
+      "prompt": "I just finished fine-tuning Llama 3.1 8B on Nebius (job id: ftjob-xyz789). How do I deploy the latest checkpoint as a serverless LoRA endpoint and then query it?",
+      "expected_output": "Code to list checkpoints, POST to /v0/models with source=ftjob:ckpt format, poll for active status, then OpenAI chat completions with the deployed model name."
+    },
+    {
+      "id": 7,
+      "skill": "nebius-deploy-lora",
+      "prompt": "I have a LoRA adapter for Llama 3.1 8B hosted on HuggingFace at huggingface.co/myorg/domain-lora. How do I deploy it on Nebius Token Factory without uploading a local file?",
+      "expected_output": "POST /v0/models with source=HuggingFace URL, correct base_model, name field, and wait_for_validation polling."
+    },
+    {
+      "id": 8,
+      "skill": "nebius-batch-synthetic",
+      "prompt": "I have 10,000 domain-specific questions in a list and want to generate expert answers using Llama 70B on Nebius at the cheapest possible cost. How do I run this as a batch job and get results back as a JSONL file?",
+      "expected_output": "Build JSONL with custom_id per request, upload with purpose='batch', batches.create with 24h window, poll loop, download output_file_id, parse and save results."
+    },
+    {
+      "id": 9,
+      "skill": "nebius-batch-synthetic",
+      "prompt": "I want to generate a synthetic instruction-tuning dataset using Nebius batch inference — 5000 prompts, teacher model generates answers, then I export it as conversational JSONL ready for fine-tuning. Walk me through it.",
+      "expected_output": "Full pipeline: JSONL building with system prompt, batch upload, job creation, polling, output download, id_to_prompt lookup, quality filter, conversational JSONL export."
+    },
+    {
+      "id": 10,
+      "skill": "nebius-datalab-pipeline",
+      "prompt": "I want to build a full data flywheel on Nebius: start with a list of domain prompts, use a 70B teacher model to generate training data, fine-tune a 8B model on it, deploy the result, and smoke test it. How do I orchestrate all of this?",
+      "expected_output": "8-step pipeline covering: inference logs, dataset upload, batch inference with teacher, quality curation, training file upload, fine-tuning job, LoRA deploy, and smoke test — with cross-references to the right APIs."
+    },
+    {
+      "id": 11,
+      "skill": "nebius-datalab-pipeline",
+      "prompt": "I'm building a RAG assistant and want to use Nebius DataLab to: generate synthetic QA examples with a large model, curate them, fine-tune a smaller 8B model on those examples, and deploy it. What's the end-to-end workflow with code?",
+      "expected_output": "Pipeline steps with working code snippets for each stage, mentioning DataLab data types, batch inference for synthesis, fine-tuning API, and LoRA deployment."
+    }
+  ]
+}

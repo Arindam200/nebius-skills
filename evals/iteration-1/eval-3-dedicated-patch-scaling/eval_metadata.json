@@ -1,0 +1,28 @@
+{
+  "eval_id": 3,
+  "eval_name": "dedicated-patch-scaling",
+  "skill": "nebius-dedicated-endpoint",
+  "prompt": "Traffic spiked on my Nebius dedicated endpoint (endpoint_id=ep-xyz789). I need to increase max_replicas to 8 without redeploying. How do I do a live patch?",
+  "assertions": [
+    {
+      "text": "Uses PATCH method (not POST or PUT)",
+      "check": "string_match",
+      "value": "PATCH"
+    },
+    {
+      "text": "Uses correct endpoint URL with the user's endpoint_id ep-xyz789",
+      "check": "string_match",
+      "value": "ep-xyz789"
+    },
+    {
+      "text": "Sets max_replicas to 8",
+      "check": "string_match",
+      "value": "max_replicas"
+    },
+    {
+      "text": "Mentions no downtime / live update (doesn't require redeployment)",
+      "check": "qualitative",
+      "value": "Response explains this is a live update without requiring redeployment"
+    }
+  ]
+}

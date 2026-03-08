@@ -1,0 +1,248 @@
+{
+  "skill_name": "nebius-skills",
+  "iteration": 1,
+  "generated_at": "2026-03-08",
+  "summary": {
+    "with_skill": {
+      "mean_pass_rate": 0.689,
+      "mean_pass_rate_skill_loaded_only": 0.967,
+      "evals_total": 9,
+      "evals_skill_loaded": 6,
+      "evals_skill_failed_to_load": 3
+    },
+    "without_skill": {
+      "mean_pass_rate": 0.585,
+      "evals_total": 9,
+      "evals_with_data": 8,
+      "evals_missing_response": 1
+    },
+    "delta": {
+      "overall": 0.104,
+      "skill_loaded_evals_only": 0.382,
+      "note": "3 skill loading failures heavily drag down the with_skill mean. When only counting evals where skill loaded, delta is +0.382."
+    }
+  },
+  "evals": [
+    {
+      "eval_id": 0,
+      "eval_name": "finetune-upload-and-start",
+      "skill": "nebius-finetune",
+      "with_skill": {
+        "pass_rate": 1.0,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "skill_loaded": true,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "without_skill": {
+        "pass_rate": 0.4,
+        "assertions_passed": 2,
+        "assertions_total": 5,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": 0.6
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "finetune-monitor-checkpoints",
+      "skill": "nebius-finetune",
+      "with_skill": {
+        "pass_rate": 1.0,
+        "assertions_passed": 5,
+        "assertions_total": 5,
+        "skill_loaded": true,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "without_skill": {
+        "pass_rate": 0.8,
+        "assertions_passed": 4,
+        "assertions_total": 5,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": 0.2
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "dedicated-create-and-infer",
+      "skill": "nebius-dedicated-endpoint",
+      "with_skill": {
+        "pass_rate": 1.0,
+        "assertions_passed": 6,
+        "assertions_total": 6,
+        "skill_loaded": true,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "without_skill": {
+        "pass_rate": null,
+        "assertions_passed": null,
+        "assertions_total": 6,
+        "tokens": null,
+        "duration_ms": null,
+        "note": "without_skill agent was still pending at time of grading — no response available"
+      },
+      "delta": null
+    },
+    {
+      "eval_id": 3,
+      "eval_name": "dedicated-patch-scaling",
+      "skill": "nebius-dedicated-endpoint",
+      "with_skill": {
+        "pass_rate": 1.0,
+        "assertions_passed": 4,
+        "assertions_total": 4,
+        "skill_loaded": true,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "without_skill": {
+        "pass_rate": 1.0,
+        "assertions_passed": 4,
+        "assertions_total": 4,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": 0.0,
+      "note": "Task was simple enough that baseline answered correctly without the skill"
+    },
+    {
+      "eval_id": 4,
+      "eval_name": "observability-grafana-promql",
+      "skill": "nebius-observability",
+      "with_skill": {
+        "pass_rate": 0.4,
+        "assertions_passed": 2,
+        "assertions_total": 5,
+        "skill_loaded": false,
+        "tokens": null,
+        "duration_ms": null,
+        "note": "Skill failed to load — response is equivalent to a baseline run"
+      },
+      "without_skill": {
+        "pass_rate": 0.4,
+        "assertions_passed": 2,
+        "assertions_total": 5,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": 0.0
+    },
+    {
+      "eval_id": 5,
+      "eval_name": "observability-prometheus-config",
+      "skill": "nebius-observability",
+      "with_skill": {
+        "pass_rate": 0.8,
+        "assertions_passed": 4,
+        "assertions_total": 5,
+        "skill_loaded": true,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "without_skill": {
+        "pass_rate": 0.4,
+        "assertions_passed": 2,
+        "assertions_total": 5,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": 0.4
+    },
+    {
+      "eval_id": 6,
+      "eval_name": "deploy-lora-from-job",
+      "skill": "nebius-deploy-lora",
+      "with_skill": {
+        "pass_rate": 0.0,
+        "assertions_passed": 0,
+        "assertions_total": 5,
+        "skill_loaded": false,
+        "tokens": null,
+        "duration_ms": null,
+        "note": "Skill failed to load — no response produced"
+      },
+      "without_skill": {
+        "pass_rate": 0.6,
+        "assertions_passed": 3,
+        "assertions_total": 5,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": -0.6
+    },
+    {
+      "eval_id": 7,
+      "eval_name": "deploy-lora-from-hf",
+      "skill": "nebius-deploy-lora",
+      "with_skill": {
+        "pass_rate": 1.0,
+        "assertions_passed": 4,
+        "assertions_total": 4,
+        "skill_loaded": true,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "without_skill": {
+        "pass_rate": 0.25,
+        "assertions_passed": 1,
+        "assertions_total": 4,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": 0.75
+    },
+    {
+      "eval_id": 8,
+      "eval_name": "batch-10k-questions",
+      "skill": "nebius-batch-synthetic",
+      "with_skill": {
+        "pass_rate": 0.0,
+        "assertions_passed": 0,
+        "assertions_total": 6,
+        "skill_loaded": false,
+        "tokens": null,
+        "duration_ms": null,
+        "note": "Skill failed to load — no response produced"
+      },
+      "without_skill": {
+        "pass_rate": 0.833,
+        "assertions_passed": 5,
+        "assertions_total": 6,
+        "tokens": null,
+        "duration_ms": null
+      },
+      "delta": -0.833
+    }
+  ],
+  "analyst_observations": [
+    {
+      "type": "critical",
+      "observation": "3 of 9 evals had skill loading failures (eval-4, eval-6, eval-8). These are the primary issue to fix in iteration-2. The failures affect nebius-observability (partially), nebius-deploy-lora (partially), and nebius-batch-synthetic.",
+      "action": "Run description optimization (scripts/run_loop.py) on the three affected skills to improve trigger reliability."
+    },
+    {
+      "type": "non_discriminating",
+      "observation": "eval-3 (dedicated-patch-scaling) shows delta=0.0 — both with and without skill scored 1.0. The task was straightforward enough that the baseline answered correctly. This eval does not discriminate skill quality.",
+      "action": "Consider replacing with a harder variant (e.g., multi-region scaling + flavor change in one request) in iteration-2."
+    },
+    {
+      "type": "strong_signal",
+      "observation": "When the skill loaded, it showed strong positive deltas: eval-0 (+0.60), eval-7 (+0.75), eval-5 (+0.40). The skill content itself is high quality — the triggering is the bottleneck.",
+      "action": "Prioritize fixing skill loading/triggering over rewriting skill content."
+    },
+    {
+      "type": "missing_data",
+      "observation": "eval-2 without_skill response is missing (agent was still pending at grading time). Delta is unknown for this eval.",
+      "action": "Re-run the without_skill baseline for eval-2 in iteration-2."
+    },
+    {
+      "type": "missing_data",
+      "observation": "All timing.json files are empty — token counts and duration_ms were not captured during iteration-1 runs.",
+      "action": "Ensure timing data is saved immediately when subagents complete in iteration-2."
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+# Environment
+.env
+.env.*
+*.env
+
+# API keys / secrets
+secrets.json
+credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Data files (don't accidentally commit training data or batch outputs)
+*.jsonl
+!evals/evals.json
+!evals/evals_with_assertions.json
+training.jsonl
+validation.jsonl
+batch_requests.jsonl
+batch_output.jsonl
+curated_training.jsonl
+raw_dataset.jsonl
+
+# Checkpoint / model weights
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+adapter_model.*
+adapter_config.json
+*.tar.gz
+*.zip
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+nohup.out

@@ -1,0 +1,72 @@
+{
+  "evals": [
+    {
+      "eval_name": "finetune-upload-and-start",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.4,
+      "delta": 0.6,
+      "skill_loaded": true
+    },
+    {
+      "eval_name": "finetune-monitor-checkpoints",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.8,
+      "delta": 0.2,
+      "skill_loaded": true
+    },
+    {
+      "eval_name": "dedicated-create-and-infer",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": null,
+      "delta": null,
+      "skill_loaded": true,
+      "note": "without_skill response was missing (agent still pending)"
+    },
+    {
+      "eval_name": "dedicated-patch-scaling",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 1.0,
+      "delta": 0.0,
+      "skill_loaded": true,
+      "note": "Both runs answered correctly; task was straightforward enough that baseline was sufficient"
+    },
+    {
+      "eval_name": "observability-grafana-promql",
+      "with_skill_pass_rate": 0.4,
+      "without_skill_pass_rate": 0.4,
+      "delta": 0.0,
+      "skill_loaded": false,
+      "note": "Skill failed to load in with_skill run; both runs produced equivalent baseline responses"
+    },
+    {
+      "eval_name": "observability-prometheus-config",
+      "with_skill_pass_rate": 0.8,
+      "without_skill_pass_rate": 0.4,
+      "delta": 0.4,
+      "skill_loaded": true
+    },
+    {
+      "eval_name": "deploy-from-job",
+      "with_skill_pass_rate": 0.0,
+      "without_skill_pass_rate": 0.6,
+      "delta": -0.6,
+      "skill_loaded": false,
+      "note": "Skill failed to load in with_skill run; response is absent (0.0). without_skill produced a partial but functional answer."
+    },
+    {
+      "eval_name": "deploy-from-hf",
+      "with_skill_pass_rate": 1.0,
+      "without_skill_pass_rate": 0.25,
+      "delta": 0.75,
+      "skill_loaded": true
+    },
+    {
+      "eval_name": "batch-10k-questions",
+      "with_skill_pass_rate": 0.0,
+      "without_skill_pass_rate": 0.833,
+      "delta": -0.833,
+      "skill_loaded": false,
+      "note": "Skill failed to load in with_skill run; response is absent (0.0). without_skill produced a strong answer hitting 5/6 assertions."
+    }
+  ]
+}

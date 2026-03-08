@@ -1,0 +1,33 @@
+{
+  "eval_id": 5,
+  "eval_name": "observability-prometheus-config",
+  "run_type": "with_skill",
+  "expectations": [
+    {
+      "text": "Provides a complete prometheus.yml with scrape_configs",
+      "passed": true,
+      "evidence": "Two complete prometheus.yml configurations provided (newer and older Prometheus versions), both with scrape_configs"
+    },
+    {
+      "text": "Includes the metrics_path with /prometheus/metrics",
+      "passed": false,
+      "evidence": "Uses /projects/<project_ID>/service-provider/prometheus/federate as metrics_path, not /prometheus/metrics"
+    },
+    {
+      "text": "Mentions PROJECT_ID must be in the metrics path",
+      "passed": true,
+      "evidence": "metrics_path: '/projects/<project_ID>/service-provider/prometheus/federate' explicitly shows project ID in the path; table row states 'Must include your project ID'"
+    },
+    {
+      "text": "Uses bearer_token for authentication",
+      "passed": true,
+      "evidence": "bearer_token: '<static_API_key>' used in both yaml configurations"
+    },
+    {
+      "text": "Recommends 15s scrape interval",
+      "passed": true,
+      "evidence": "scrape_interval: 15s set in both yaml configurations; table note says 'Minimum recommended: 15 seconds'"
+    }
+  ],
+  "pass_rate": 0.8
+}

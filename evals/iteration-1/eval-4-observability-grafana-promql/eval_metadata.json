@@ -1,0 +1,33 @@
+{
+  "eval_id": 4,
+  "eval_name": "observability-grafana-promql",
+  "skill": "nebius-observability",
+  "prompt": "I want to monitor p95 time-to-first-token and requests per minute for my Nebius Token Factory inference programmatically. We already use Grafana. What's the setup?",
+  "assertions": [
+    {
+      "text": "Provides the correct monitoring base URL: monitoring.tokenfactory.nebius.com",
+      "check": "string_match",
+      "value": "monitoring.tokenfactory.nebius.com"
+    },
+    {
+      "text": "Includes PromQL for p95 TTFT using histogram_quantile(0.95, ...)",
+      "check": "string_match",
+      "value": "histogram_quantile"
+    },
+    {
+      "text": "Includes PromQL for requests per minute using rate()",
+      "check": "string_match",
+      "value": "rate("
+    },
+    {
+      "text": "Provides Grafana datasource configuration",
+      "check": "qualitative",
+      "value": "Includes Grafana setup steps or datasource JSON config"
+    },
+    {
+      "text": "Mentions bearer token authentication",
+      "check": "string_match",
+      "value": "Bearer"
+    }
+  ]
+}

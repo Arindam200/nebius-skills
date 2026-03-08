@@ -1,0 +1,33 @@
+{
+  "eval_id": 1,
+  "eval_name": "finetune-monitor-checkpoints",
+  "run_type": "with_skill",
+  "expectations": [
+    {
+      "text": "Uses list_events to poll job events",
+      "passed": true,
+      "evidence": "client.fine_tuning.jobs.list_events(JOB_ID) called inside the polling loop"
+    },
+    {
+      "text": "Checks job status for 'succeeded'",
+      "passed": true,
+      "evidence": "TERMINAL_STATUSES = {\"succeeded\", \"failed\", \"cancelled\"} and while job.status not in TERMINAL_STATUSES"
+    },
+    {
+      "text": "Uses checkpoints.list to retrieve checkpoints",
+      "passed": true,
+      "evidence": "client.fine_tuning.jobs.checkpoints.list(JOB_ID).data used to list checkpoints"
+    },
+    {
+      "text": "Downloads checkpoint files using files.content",
+      "passed": true,
+      "evidence": "file_content = client.files.content(file_id) followed by file_content.write_to_file(output_path)"
+    },
+    {
+      "text": "References the real job ID ftjob-abc123 from the user's prompt",
+      "passed": true,
+      "evidence": "JOB_ID = \"ftjob-abc123\" defined at the top of the script"
+    }
+  ],
+  "pass_rate": 1.0
+}

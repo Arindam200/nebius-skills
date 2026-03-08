@@ -1,0 +1,35 @@
+{
+  "eval_id": 4,
+  "eval_name": "observability-grafana-promql",
+  "run_type": "with_skill",
+  "note": "Skill failed to load — agent could not read skill file. Response is effectively a baseline response.",
+  "skill_loaded": false,
+  "expectations": [
+    {
+      "text": "Provides the correct monitoring base URL: monitoring.tokenfactory.nebius.com",
+      "passed": false,
+      "evidence": "Response uses generic '<token-factory-host>:<metrics-port>' placeholder; does not mention monitoring.tokenfactory.nebius.com"
+    },
+    {
+      "text": "Includes PromQL for p95 TTFT using histogram_quantile(0.95, ...)",
+      "passed": true,
+      "evidence": "histogram_quantile(0.95, sum(rate(vllm:time_to_first_token_seconds_bucket[5m])) by (le)) provided"
+    },
+    {
+      "text": "Includes PromQL for requests per minute using rate()",
+      "passed": true,
+      "evidence": "sum(rate(vllm:time_to_first_token_seconds_count[1m])) * 60 provided"
+    },
+    {
+      "text": "Provides Grafana datasource configuration",
+      "passed": false,
+      "evidence": "Mentions adding Prometheus as a Grafana data source but provides no concrete datasource configuration (URL, auth settings)"
+    },
+    {
+      "text": "Mentions bearer token authentication",
+      "passed": false,
+      "evidence": "No mention of bearer token authentication for the Nebius monitoring endpoint"
+    }
+  ],
+  "pass_rate": 0.4
+}

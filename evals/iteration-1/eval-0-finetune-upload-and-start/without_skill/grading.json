@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "eval_name": "finetune-upload-and-start",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Uses correct Nebius base_url: api.tokenfactory.nebius.com",
+      "passed": false,
+      "evidence": "Uses api.studio.nebius.ai/v1/ instead of the correct api.tokenfactory.nebius.com/v1/"
+    },
+    {
+      "text": "Uses OpenAI client (not raw requests) for the fine-tuning API",
+      "passed": false,
+      "evidence": "File upload uses raw curl commands, not the OpenAI Python client; OpenAI client only used for job creation"
+    },
+    {
+      "text": "Uploads file with purpose='fine-tune'",
+      "passed": true,
+      "evidence": "curl command includes -F \"purpose=fine-tune\" for file upload"
+    },
+    {
+      "text": "Creates fine-tuning job with lora_rank hyperparameter",
+      "passed": false,
+      "evidence": "No lora_rank in hyperparameters; uses nested method.supervised.hyperparameters structure without lora_rank"
+    },
+    {
+      "text": "Specifies the correct base model: Meta-Llama-3.1-8B-Instruct",
+      "passed": true,
+      "evidence": "model=\"meta-llama/Meta-Llama-3.1-8B-Instruct\" specified in job creation"
+    }
+  ],
+  "pass_rate": 0.4
+}

@@ -1,0 +1,33 @@
+{
+  "eval_id": 5,
+  "eval_name": "observability-prometheus-config",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Provides a complete prometheus.yml with scrape_configs",
+      "passed": true,
+      "evidence": "A complete prometheus.yml with global and scrape_configs sections provided"
+    },
+    {
+      "text": "Includes the metrics_path with /prometheus/metrics",
+      "passed": false,
+      "evidence": "Uses /metrics as metrics_path, not the correct /prometheus/metrics or the federate path"
+    },
+    {
+      "text": "Mentions PROJECT_ID must be in the metrics path",
+      "passed": false,
+      "evidence": "No mention of PROJECT_ID in the metrics path; uses a generic /metrics endpoint at iam.api.nebius.cloud"
+    },
+    {
+      "text": "Uses bearer_token for authentication",
+      "passed": true,
+      "evidence": "Uses authorization.type: Bearer with credentials_file for bearer token auth"
+    },
+    {
+      "text": "Recommends 15s scrape interval",
+      "passed": false,
+      "evidence": "Sets scrape_interval: 60s (not 15s) in both global and job-level config"
+    }
+  ],
+  "pass_rate": 0.4
+}

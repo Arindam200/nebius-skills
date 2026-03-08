@@ -1,0 +1,33 @@
+{
+  "eval_id": 4,
+  "eval_name": "observability-grafana-promql",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Provides the correct monitoring base URL: monitoring.tokenfactory.nebius.com",
+      "passed": false,
+      "evidence": "Uses generic vLLM metric names and mentions '<token-factory-host>:<metrics-port>' without specifying monitoring.tokenfactory.nebius.com"
+    },
+    {
+      "text": "Includes PromQL for p95 TTFT using histogram_quantile(0.95, ...)",
+      "passed": true,
+      "evidence": "histogram_quantile(0.95, sum(rate(vllm:time_to_first_token_seconds_bucket[5m])) by (le)) provided"
+    },
+    {
+      "text": "Includes PromQL for requests per minute using rate()",
+      "passed": true,
+      "evidence": "sum(rate(vllm:time_to_first_token_seconds_count[1m])) * 60 provided"
+    },
+    {
+      "text": "Provides Grafana datasource configuration",
+      "passed": false,
+      "evidence": "Only mentions adding Prometheus as a data source in general terms; no concrete datasource configuration block"
+    },
+    {
+      "text": "Mentions bearer token authentication",
+      "passed": false,
+      "evidence": "No mention of bearer token or any authentication mechanism for accessing the metrics endpoint"
+    }
+  ],
+  "pass_rate": 0.4
+}

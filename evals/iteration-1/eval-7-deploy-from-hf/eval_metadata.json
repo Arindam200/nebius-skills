@@ -1,0 +1,28 @@
+{
+  "eval_id": 7,
+  "eval_name": "deploy-lora-from-hf",
+  "skill": "nebius-deploy-lora",
+  "prompt": "I have a LoRA adapter for Llama 3.1 8B hosted on HuggingFace at huggingface.co/myorg/domain-lora. How do I deploy it on Nebius Token Factory without uploading a local file?",
+  "assertions": [
+    {
+      "text": "Uses the HuggingFace URL directly as the source field (no file upload needed)",
+      "check": "string_match",
+      "value": "huggingface.co"
+    },
+    {
+      "text": "Uses POST /v0/models",
+      "check": "string_match",
+      "value": "v0/models"
+    },
+    {
+      "text": "Specifies base_model as Llama 3.1 8B",
+      "check": "string_match",
+      "value": "Llama-3.1-8B"
+    },
+    {
+      "text": "Includes wait-for-validation polling loop",
+      "check": "string_match",
+      "value": "active"
+    }
+  ]
+}

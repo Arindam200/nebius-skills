@@ -1,0 +1,33 @@
+{
+  "eval_id": 6,
+  "eval_name": "deploy-from-job",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Uses POST /v0/models endpoint",
+      "passed": false,
+      "evidence": "Uses sdk.inference.deployments.create() (guessed Nebius SDK) and CLI nebius ai-studio deployment create, not POST /v0/models"
+    },
+    {
+      "text": "Uses ftjob-xyz789 job ID in the source/reference",
+      "passed": true,
+      "evidence": "lora_adapter_id=\"ftjob-xyz789\" used in the Python SDK call"
+    },
+    {
+      "text": "Retrieves latest checkpoint before deploying",
+      "passed": false,
+      "evidence": "No checkpoint retrieval step shown; jumps directly to deployment creation"
+    },
+    {
+      "text": "Polls for status == 'active'",
+      "passed": true,
+      "evidence": "while loop checks if status.status == \"ACTIVE\" (uppercase, but conceptually correct)"
+    },
+    {
+      "text": "Shows how to run inference with the deployed model name",
+      "passed": true,
+      "evidence": "client.chat.completions.create(model=\"llama-3-1-8b-finetuned-lora\", ...) shown in Step 4"
+    }
+  ],
+  "pass_rate": 0.6
+}

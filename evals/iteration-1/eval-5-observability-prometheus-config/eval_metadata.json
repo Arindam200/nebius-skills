@@ -1,0 +1,33 @@
+{
+  "eval_id": 5,
+  "eval_name": "observability-prometheus-config",
+  "skill": "nebius-observability",
+  "prompt": "How do I set up Prometheus to scrape Nebius Token Factory metrics? I need a prometheus.yml config and to know what URL and auth to use.",
+  "assertions": [
+    {
+      "text": "Provides a complete prometheus.yml with scrape_configs",
+      "check": "string_match",
+      "value": "scrape_configs"
+    },
+    {
+      "text": "Includes the metrics_path with /prometheus/metrics",
+      "check": "string_match",
+      "value": "prometheus/metrics"
+    },
+    {
+      "text": "Mentions PROJECT_ID must be in the metrics path",
+      "check": "qualitative",
+      "value": "Explains that the project ID must be included in the metrics URL path"
+    },
+    {
+      "text": "Uses bearer_token for authentication",
+      "check": "string_match",
+      "value": "bearer_token"
+    },
+    {
+      "text": "Recommends 15s scrape interval",
+      "check": "string_match",
+      "value": "15s"
+    }
+  ]
+}

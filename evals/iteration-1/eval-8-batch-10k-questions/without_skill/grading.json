@@ -1,0 +1,38 @@
+{
+  "eval_id": 8,
+  "eval_name": "batch-10k-questions",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Mentions 50% cost reduction vs real-time (batch cheaper)",
+      "passed": false,
+      "evidence": "No mention of cost reduction or batch pricing advantages vs real-time"
+    },
+    {
+      "text": "Builds JSONL with custom_id field",
+      "passed": true,
+      "evidence": "\"custom_id\": f\"q-{i+1:05d}\" present in each JSONL record"
+    },
+    {
+      "text": "Uploads file with purpose='batch' or purpose field",
+      "passed": true,
+      "evidence": "client.files.create(file=f, purpose=\"batch\") used for file upload"
+    },
+    {
+      "text": "Creates batch with completion_window='24h'",
+      "passed": true,
+      "evidence": "client.batches.create(..., completion_window=\"24h\") explicitly set"
+    },
+    {
+      "text": "Downloads output via output_file_id",
+      "passed": true,
+      "evidence": "client.files.content(batch.output_file_id) used to download results"
+    },
+    {
+      "text": "Uses Llama 70B as specified",
+      "passed": true,
+      "evidence": "\"model\": \"meta-llama/Meta-Llama-3.1-70B-Instruct\" used in the batch JSONL records"
+    }
+  ],
+  "pass_rate": 0.833
+}

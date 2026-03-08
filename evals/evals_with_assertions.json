@@ -1,0 +1,396 @@
+{
+  "skill_name": "nebius-skills",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "finetune-upload-and-start",
+      "skill": "nebius-finetune",
+      "prompt": "I have a customer support JSONL dataset (~500 examples) and I want to train a Llama 3.1 8B model on Nebius Token Factory to specialize it for my product. How do I upload the data and start a LoRA fine-tuning job?",
+      "assertions": [
+        {
+          "text": "Uses correct Nebius base_url: https://api.tokenfactory.nebius.com/v1/",
+          "check": "string_match",
+          "value": "api.tokenfactory.nebius.com"
+        },
+        {
+          "text": "Uses OpenAI client (not raw requests) for the fine-tuning API",
+          "check": "string_match",
+          "value": "OpenAI"
+        },
+        {
+          "text": "Uploads file with purpose='fine-tune'",
+          "check": "string_match",
+          "value": "fine-tune"
+        },
+        {
+          "text": "Creates fine-tuning job with lora_rank hyperparameter",
+          "check": "string_match",
+          "value": "lora_rank"
+        },
+        {
+          "text": "Specifies the correct base model: meta-llama/Meta-Llama-3.1-8B-Instruct",
+          "check": "string_match",
+          "value": "Meta-Llama-3.1-8B-Instruct"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "eval_name": "finetune-monitor-checkpoints",
+      "skill": "nebius-finetune",
+      "prompt": "My fine-tuning job ftjob-abc123 on Nebius has been running for a few hours. How do I stream the events to see what's happening and then download the checkpoints once it succeeds?",
+      "assertions": [
+        {
+          "text": "Uses list_events to poll job events",
+          "check": "string_match",
+          "value": "list_events"
+        },
+        {
+          "text": "Checks job status for 'succeeded'",
+          "check": "string_match",
+          "value": "succeeded"
+        },
+        {
+          "text": "Uses checkpoints.list to retrieve checkpoints",
+          "check": "string_match",
+          "value": "checkpoints"
+        },
+        {
+          "text": "Downloads checkpoint files using files.content",
+          "check": "string_match",
+          "value": "files.content"
+        },
+        {
+          "text": "References the real job ID ftjob-abc123 from the user's prompt",
+          "check": "string_match",
+          "value": "ftjob-abc123"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "dedicated-create-and-infer",
+      "skill": "nebius-dedicated-endpoint",
+      "prompt": "I need to set up an isolated GPT-OSS-20B endpoint on Nebius in eu-west1 that auto-scales between 2 and 5 replicas. Walk me through the API calls to create it, wait for it to be ready, and run a test inference.",
+      "assertions": [
+        {
+          "text": "Uses correct control plane URL /v0/dedicated_endpoints",
+          "check": "string_match",
+          "value": "v0/dedicated_endpoints"
+        },
+        {
+          "text": "Includes region: eu-west1 in the payload",
+          "check": "string_match",
+          "value": "eu-west1"
+        },
+        {
+          "text": "Sets scaling with min_replicas=2 and max_replicas=5",
+          "check": "string_match",
+          "value": "min_replicas"
+        },
+        {
+          "text": "Polls for status == 'ready' before running inference",
+          "check": "string_match",
+          "value": "ready"
+        },
+        {
+          "text": "Uses eu-west1 inference base URL for actual inference calls",
+          "check": "string_match",
+          "value": "eu-west1.nebius.com"
+        },
+        {
+          "text": "Uses routing_key for inference model parameter",
+          "check": "string_match",
+          "value": "routing_key"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "dedicated-patch-scaling",
+      "skill": "nebius-dedicated-endpoint",
+      "prompt": "Traffic spiked on my Nebius dedicated endpoint (endpoint_id=ep-xyz789). I need to increase max_replicas to 8 without redeploying. How do I do a live patch?",
+      "assertions": [
+        {
+          "text": "Uses PATCH method (not POST or PUT)",
+          "check": "string_match",
+          "value": "PATCH"
+        },
+        {
+          "text": "Uses correct endpoint URL with the user's endpoint_id ep-xyz789",
+          "check": "string_match",
+          "value": "ep-xyz789"
+        },
+        {
+          "text": "Sets max_replicas to 8",
+          "check": "string_match",
+          "value": "max_replicas"
+        },
+        {
+          "text": "Mentions no downtime / live update (doesn't require redeployment)",
+          "check": "qualitative",
+          "value": "Response explains this is a live update without requiring redeployment"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "observability-grafana-promql",
+      "skill": "nebius-observability",
+      "prompt": "I want to monitor p95 time-to-first-token and requests per minute for my Nebius Token Factory inference programmatically. We already use Grafana. What's the setup?",
+      "assertions": [
+        {
+          "text": "Provides the correct monitoring base URL: monitoring.tokenfactory.nebius.com",
+          "check": "string_match",
+          "value": "monitoring.tokenfactory.nebius.com"
+        },
+        {
+          "text": "Includes PromQL for p95 TTFT using histogram_quantile(0.95, ...)",
+          "check": "string_match",
+          "value": "histogram_quantile"
+        },
+        {
+          "text": "Includes PromQL for requests per minute using rate()",
+          "check": "string_match",
+          "value": "rate("
+        },
+        {
+          "text": "Provides Grafana datasource configuration",
+          "check": "qualitative",
+          "value": "Includes Grafana setup steps or datasource JSON config"
+        },
+        {
+          "text": "Mentions bearer token authentication",
+          "check": "string_match",
+          "value": "Bearer"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "observability-prometheus-config",
+      "skill": "nebius-observability",
+      "prompt": "How do I set up Prometheus to scrape Nebius Token Factory metrics? I need a prometheus.yml config and to know what URL and auth to use.",
+      "assertions": [
+        {
+          "text": "Provides a complete prometheus.yml with scrape_configs",
+          "check": "string_match",
+          "value": "scrape_configs"
+        },
+        {
+          "text": "Includes the metrics_path with /prometheus/metrics",
+          "check": "string_match",
+          "value": "prometheus/metrics"
+        },
+        {
+          "text": "Mentions PROJECT_ID must be in the metrics path",
+          "check": "qualitative",
+          "value": "Explains that the project ID must be included in the metrics URL path"
+        },
+        {
+          "text": "Uses bearer_token for authentication",
+          "check": "string_match",
+          "value": "bearer_token"
+        },
+        {
+          "text": "Recommends 15s scrape interval",
+          "check": "string_match",
+          "value": "15s"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "eval_name": "deploy-lora-from-job",
+      "skill": "nebius-deploy-lora",
+      "prompt": "I just finished fine-tuning Llama 3.1 8B on Nebius (job id: ftjob-xyz789). How do I deploy the latest checkpoint as a serverless LoRA endpoint and then query it?",
+      "assertions": [
+        {
+          "text": "Uses POST /v0/models endpoint",
+          "check": "string_match",
+          "value": "v0/models"
+        },
+        {
+          "text": "Uses ftjob-xyz789:checkpoint_id format for source field",
+          "check": "string_match",
+          "value": "ftjob-xyz789"
+        },
+        {
+          "text": "Retrieves latest checkpoint before deploying",
+          "check": "string_match",
+          "value": "checkpoints"
+        },
+        {
+          "text": "Polls for status == 'active'",
+          "check": "string_match",
+          "value": "active"
+        },
+        {
+          "text": "Shows how to run inference with the deployed model name",
+          "check": "qualitative",
+          "value": "Includes code to call the deployed model via chat completions API"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "eval_name": "deploy-lora-from-hf",
+      "skill": "nebius-deploy-lora",
+      "prompt": "I have a LoRA adapter for Llama 3.1 8B hosted on HuggingFace at huggingface.co/myorg/domain-lora. How do I deploy it on Nebius Token Factory without uploading a local file?",
+      "assertions": [
+        {
+          "text": "Uses the HuggingFace URL directly as the source field (no file upload needed)",
+          "check": "string_match",
+          "value": "huggingface.co"
+        },
+        {
+          "text": "Uses POST /v0/models",
+          "check": "string_match",
+          "value": "v0/models"
+        },
+        {
+          "text": "Specifies base_model as Llama 3.1 8B",
+          "check": "string_match",
+          "value": "Llama-3.1-8B"
+        },
+        {
+          "text": "Includes wait-for-validation polling loop",
+          "check": "string_match",
+          "value": "active"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "batch-10k-questions",
+      "skill": "nebius-batch-synthetic",
+      "prompt": "I have 10,000 domain-specific questions in a list and want to generate expert answers using Llama 70B on Nebius at the cheapest possible cost. How do I run this as a batch job and get results back as a JSONL file?",
+      "assertions": [
+        {
+          "text": "Mentions 50% cost reduction vs real-time",
+          "check": "qualitative",
+          "value": "Mentions batch inference is cheaper (50% off)"
+        },
+        {
+          "text": "Builds JSONL with custom_id and url fields per request",
+          "check": "string_match",
+          "value": "custom_id"
+        },
+        {
+          "text": "Uploads file with purpose='batch'",
+          "check": "string_match",
+          "value": "purpose"
+        },
+        {
+          "text": "Creates batch with completion_window='24h'",
+          "check": "string_match",
+          "value": "24h"
+        },
+        {
+          "text": "Downloads output via output_file_id",
+          "check": "string_match",
+          "value": "output_file_id"
+        },
+        {
+          "text": "Uses Llama 70B as specified",
+          "check": "string_match",
+          "value": "70B"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "eval_name": "batch-synthetic-finetune-export",
+      "skill": "nebius-batch-synthetic",
+      "prompt": "I want to generate a synthetic instruction-tuning dataset using Nebius batch inference — 5000 prompts, teacher model generates answers, then I export it as conversational JSONL ready for fine-tuning. Walk me through it.",
+      "assertions": [
+        {
+          "text": "Shows full pipeline: build → upload → create batch → poll → download → export",
+          "check": "qualitative",
+          "value": "Covers all steps from JSONL building to final export"
+        },
+        {
+          "text": "Output JSONL uses messages format with role/content",
+          "check": "string_match",
+          "value": "messages"
+        },
+        {
+          "text": "Includes a quality filter step (skip short/low-quality responses)",
+          "check": "qualitative",
+          "value": "Includes some form of quality filtering"
+        },
+        {
+          "text": "Maps custom_id back to original prompts",
+          "check": "string_match",
+          "value": "custom_id"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "eval_name": "datalab-full-flywheel",
+      "skill": "nebius-datalab-pipeline",
+      "prompt": "I want to build a full data flywheel on Nebius: start with a list of domain prompts, use a 70B teacher model to generate training data, fine-tune a 8B model on it, deploy the result, and smoke test it. How do I orchestrate all of this?",
+      "assertions": [
+        {
+          "text": "Covers all major pipeline stages: data generation, fine-tuning, deployment",
+          "check": "qualitative",
+          "value": "Covers batch/synthetic data generation + fine-tuning + LoRA deployment stages"
+        },
+        {
+          "text": "Uses teacher model (70B) for data generation, student (8B) for fine-tuning",
+          "check": "qualitative",
+          "value": "Distinguishes teacher 70B vs student 8B"
+        },
+        {
+          "text": "Includes batch inference step for cost-efficient data generation",
+          "check": "string_match",
+          "value": "batch"
+        },
+        {
+          "text": "References v0/models for deployment",
+          "check": "string_match",
+          "value": "v0/models"
+        },
+        {
+          "text": "Includes a smoke test step",
+          "check": "qualitative",
+          "value": "Mentions smoke test or validation after deployment"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "eval_name": "datalab-rag-assistant",
+      "skill": "nebius-datalab-pipeline",
+      "prompt": "I'm building a RAG assistant and want to use Nebius DataLab to: generate synthetic QA examples with a large model, curate them, fine-tune a smaller 8B model on those examples, and deploy it. What's the end-to-end workflow with code?",
+      "assertions": [
+        {
+          "text": "Provides code for each distinct stage of the pipeline",
+          "check": "qualitative",
+          "value": "Has working code snippets for data generation, fine-tuning, and deployment"
+        },
+        {
+          "text": "Mentions DataLab as data management layer",
+          "check": "string_match",
+          "value": "DataLab"
+        },
+        {
+          "text": "Includes curation/quality filtering step",
+          "check": "qualitative",
+          "value": "Includes a step to filter or curate the generated examples"
+        },
+        {
+          "text": "Uses conversational JSONL format for fine-tuning",
+          "check": "string_match",
+          "value": "messages"
+        },
+        {
+          "text": "Ends with a deployed model ready for RAG queries",
+          "check": "qualitative",
+          "value": "Shows how the deployed model can be queried"
+        }
+      ]
+    }
+  ]
+}

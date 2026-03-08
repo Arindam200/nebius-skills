@@ -1,0 +1,38 @@
+{
+  "eval_id": 2,
+  "eval_name": "dedicated-create-and-infer",
+  "run_type": "with_skill",
+  "expectations": [
+    {
+      "text": "Uses correct control plane URL /v0/dedicated_endpoints",
+      "passed": true,
+      "evidence": "requests.post(f\"{CONTROL_PLANE}/v0/dedicated_endpoints\", ...) where CONTROL_PLANE=\"https://api.tokenfactory.nebius.com\""
+    },
+    {
+      "text": "Includes region: eu-west1 in the payload",
+      "passed": true,
+      "evidence": "payload includes \"region\": \"eu-west1\""
+    },
+    {
+      "text": "Sets scaling with min_replicas",
+      "passed": true,
+      "evidence": "payload includes \"scaling\": {\"min_replicas\": 2, \"max_replicas\": 5}"
+    },
+    {
+      "text": "Polls for status == 'ready' before running inference",
+      "passed": true,
+      "evidence": "wait_for_ready() function polls and checks if status == \"ready\" before returning"
+    },
+    {
+      "text": "Uses eu-west1 inference base URL for actual inference calls (eu-west1.nebius.com)",
+      "passed": true,
+      "evidence": "base_url=\"https://api.tokenfactory.eu-west1.nebius.com/v1/\" in OpenAI client for inference"
+    },
+    {
+      "text": "Uses routing_key for inference model parameter",
+      "passed": true,
+      "evidence": "model=routing_key passed to client.chat.completions.create"
+    }
+  ],
+  "pass_rate": 1.0
+}

@@ -1,0 +1,40 @@
+{
+  "eval_id": 8,
+  "eval_name": "batch-10k-questions",
+  "run_type": "with_skill",
+  "note": "Skill failed to load — agent could not read skill file. Response is absent.",
+  "skill_loaded": false,
+  "expectations": [
+    {
+      "text": "Mentions 50% cost reduction vs real-time (batch cheaper)",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Builds JSONL with custom_id field",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Uploads file with purpose='batch' or purpose field",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Creates batch with completion_window='24h'",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Downloads output via output_file_id",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Uses Llama 70B as specified",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    }
+  ],
+  "pass_rate": 0.0
+}

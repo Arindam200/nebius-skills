@@ -1,0 +1,28 @@
+{
+  "eval_id": 7,
+  "eval_name": "deploy-from-hf",
+  "run_type": "with_skill",
+  "expectations": [
+    {
+      "text": "Uses the HuggingFace URL directly as the source field (no file upload needed)",
+      "passed": true,
+      "evidence": "\"source\": \"https://huggingface.co/myorg/domain-lora\" passed directly; comment says 'HuggingFace URL — no upload needed'"
+    },
+    {
+      "text": "Uses POST /v0/models",
+      "passed": true,
+      "evidence": "requests.post(f\"{api_url}/v0/models\", ...) used to create the model"
+    },
+    {
+      "text": "Specifies base_model as Llama 3.1 8B",
+      "passed": true,
+      "evidence": "\"base_model\": \"meta-llama/Meta-Llama-3.1-8B-Instruct\" in the POST body"
+    },
+    {
+      "text": "Includes wait-for-validation polling loop",
+      "passed": true,
+      "evidence": "wait_for_validation() function polls GET /v0/models/{name} until status is 'active' or 'error'"
+    }
+  ],
+  "pass_rate": 1.0
+}

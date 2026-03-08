@@ -1,0 +1,33 @@
+{
+  "eval_id": 1,
+  "eval_name": "finetune-monitor-checkpoints",
+  "skill": "nebius-finetune",
+  "prompt": "My fine-tuning job ftjob-abc123 on Nebius has been running for a few hours. How do I stream the events to see what's happening and then download the checkpoints once it succeeds?",
+  "assertions": [
+    {
+      "text": "Uses list_events to poll job events",
+      "check": "string_match",
+      "value": "list_events"
+    },
+    {
+      "text": "Checks job status for 'succeeded'",
+      "check": "string_match",
+      "value": "succeeded"
+    },
+    {
+      "text": "Uses checkpoints.list to retrieve checkpoints",
+      "check": "string_match",
+      "value": "checkpoints"
+    },
+    {
+      "text": "Downloads checkpoint files using files.content",
+      "check": "string_match",
+      "value": "files.content"
+    },
+    {
+      "text": "References the real job ID ftjob-abc123 from the user's prompt",
+      "check": "string_match",
+      "value": "ftjob-abc123"
+    }
+  ]
+}

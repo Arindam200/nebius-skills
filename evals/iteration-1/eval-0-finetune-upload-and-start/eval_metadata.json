@@ -1,0 +1,33 @@
+{
+  "eval_id": 0,
+  "eval_name": "finetune-upload-and-start",
+  "skill": "nebius-finetune",
+  "prompt": "I have a customer support JSONL dataset (~500 examples) and I want to train a Llama 3.1 8B model on Nebius Token Factory to specialize it for my product. How do I upload the data and start a LoRA fine-tuning job?",
+  "assertions": [
+    {
+      "text": "Uses correct Nebius base_url: https://api.tokenfactory.nebius.com/v1/",
+      "check": "string_match",
+      "value": "api.tokenfactory.nebius.com"
+    },
+    {
+      "text": "Uses OpenAI client (not raw requests) for the fine-tuning API",
+      "check": "string_match",
+      "value": "OpenAI"
+    },
+    {
+      "text": "Uploads file with purpose='fine-tune'",
+      "check": "string_match",
+      "value": "fine-tune"
+    },
+    {
+      "text": "Creates fine-tuning job with lora_rank hyperparameter",
+      "check": "string_match",
+      "value": "lora_rank"
+    },
+    {
+      "text": "Specifies the correct base model: meta-llama/Meta-Llama-3.1-8B-Instruct",
+      "check": "string_match",
+      "value": "Meta-Llama-3.1-8B-Instruct"
+    }
+  ]
+}

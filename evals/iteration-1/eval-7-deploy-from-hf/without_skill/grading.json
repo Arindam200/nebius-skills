@@ -1,0 +1,28 @@
+{
+  "eval_id": 7,
+  "eval_name": "deploy-from-hf",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Uses the HuggingFace URL directly as the source field (no file upload needed)",
+      "passed": false,
+      "evidence": "Does not use a source field at all; uses adapter.model_id or --adapter-id without a direct HF URL as the source field"
+    },
+    {
+      "text": "Uses POST /v0/models",
+      "passed": false,
+      "evidence": "Uses POST https://api.studio.nebius.ai/v1/deployments (wrong base URL and wrong endpoint path)"
+    },
+    {
+      "text": "Specifies base_model as Llama 3.1 8B",
+      "passed": true,
+      "evidence": "\"base_model\": \"meta-llama/Meta-Llama-3.1-8B-Instruct\" in the curl REST API example"
+    },
+    {
+      "text": "Includes wait-for-validation polling loop",
+      "passed": false,
+      "evidence": "No polling loop shown; only UI/CLI/curl create steps with no status-checking code"
+    }
+  ],
+  "pass_rate": 0.25
+}

@@ -1,0 +1,39 @@
+{
+  "eval_id": 2,
+  "eval_name": "dedicated-create-and-infer",
+  "run_type": "without_skill",
+  "note": "Skipped — without_skill directory has no response file (agent still pending at time of grading)",
+  "expectations": [
+    {
+      "text": "Uses correct control plane URL /v0/dedicated_endpoints",
+      "passed": null,
+      "evidence": "No response file available"
+    },
+    {
+      "text": "Includes region: eu-west1 in the payload",
+      "passed": null,
+      "evidence": "No response file available"
+    },
+    {
+      "text": "Sets scaling with min_replicas",
+      "passed": null,
+      "evidence": "No response file available"
+    },
+    {
+      "text": "Polls for status == 'ready' before running inference",
+      "passed": null,
+      "evidence": "No response file available"
+    },
+    {
+      "text": "Uses eu-west1 inference base URL for actual inference calls (eu-west1.nebius.com)",
+      "passed": null,
+      "evidence": "No response file available"
+    },
+    {
+      "text": "Uses routing_key for inference model parameter",
+      "passed": null,
+      "evidence": "No response file available"
+    }
+  ],
+  "pass_rate": null
+}

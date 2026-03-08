@@ -1,0 +1,38 @@
+{
+  "eval_id": 8,
+  "eval_name": "batch-10k-questions",
+  "skill": "nebius-batch-synthetic",
+  "prompt": "I have 10,000 domain-specific questions in a list and want to generate expert answers using Llama 70B on Nebius at the cheapest possible cost. How do I run this as a batch job and get results back as a JSONL file?",
+  "assertions": [
+    {
+      "text": "Mentions 50% cost reduction vs real-time",
+      "check": "qualitative",
+      "value": "Mentions batch inference is cheaper (50% off)"
+    },
+    {
+      "text": "Builds JSONL with custom_id and url fields per request",
+      "check": "string_match",
+      "value": "custom_id"
+    },
+    {
+      "text": "Uploads file with purpose='batch'",
+      "check": "string_match",
+      "value": "purpose"
+    },
+    {
+      "text": "Creates batch with completion_window='24h'",
+      "check": "string_match",
+      "value": "24h"
+    },
+    {
+      "text": "Downloads output via output_file_id",
+      "check": "string_match",
+      "value": "output_file_id"
+    },
+    {
+      "text": "Uses Llama 70B as specified",
+      "check": "string_match",
+      "value": "70B"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "eval_id": 2,
+  "eval_name": "dedicated-create-and-infer",
+  "skill": "nebius-dedicated-endpoint",
+  "prompt": "I need to set up an isolated GPT-OSS-20B endpoint on Nebius in eu-west1 that auto-scales between 2 and 5 replicas. Walk me through the API calls to create it, wait for it to be ready, and run a test inference.",
+  "assertions": [
+    {
+      "text": "Uses correct control plane URL /v0/dedicated_endpoints",
+      "check": "string_match",
+      "value": "v0/dedicated_endpoints"
+    },
+    {
+      "text": "Includes region: eu-west1 in the payload",
+      "check": "string_match",
+      "value": "eu-west1"
+    },
+    {
+      "text": "Sets scaling with min_replicas=2 and max_replicas=5",
+      "check": "string_match",
+      "value": "min_replicas"
+    },
+    {
+      "text": "Polls for status == 'ready' before running inference",
+      "check": "string_match",
+      "value": "ready"
+    },
+    {
+      "text": "Uses eu-west1 inference base URL for actual inference calls",
+      "check": "string_match",
+      "value": "eu-west1.nebius.com"
+    },
+    {
+      "text": "Uses routing_key for inference model parameter",
+      "check": "string_match",
+      "value": "routing_key"
+    }
+  ]
+}

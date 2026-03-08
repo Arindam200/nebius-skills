@@ -1,0 +1,28 @@
+{
+  "eval_id": 3,
+  "eval_name": "dedicated-patch-scaling",
+  "run_type": "without_skill",
+  "expectations": [
+    {
+      "text": "Uses PATCH method (not POST or PUT)",
+      "passed": true,
+      "evidence": "-X PATCH in curl command and requests.patch(...) in Python code"
+    },
+    {
+      "text": "Uses correct endpoint URL with the user's endpoint_id ep-xyz789",
+      "passed": true,
+      "evidence": "URL https://api.tokenfactory.nebius.com/v0/dedicated_endpoints/ep-xyz789 used in both curl and Python"
+    },
+    {
+      "text": "Sets max_replicas to 8",
+      "passed": true,
+      "evidence": "{\"scaling\": {\"max_replicas\": 8}} in the PATCH payload"
+    },
+    {
+      "text": "Mentions no downtime / live update (doesn't require redeployment)",
+      "passed": true,
+      "evidence": "States 'Nebius dedicated endpoints support live patching via a PATCH API call. You do not need to redeploy or recreate the endpoint'"
+    }
+  ],
+  "pass_rate": 1.0
+}

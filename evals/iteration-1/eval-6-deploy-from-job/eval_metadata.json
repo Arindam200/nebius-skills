@@ -1,0 +1,33 @@
+{
+  "eval_id": 6,
+  "eval_name": "deploy-lora-from-job",
+  "skill": "nebius-deploy-lora",
+  "prompt": "I just finished fine-tuning Llama 3.1 8B on Nebius (job id: ftjob-xyz789). How do I deploy the latest checkpoint as a serverless LoRA endpoint and then query it?",
+  "assertions": [
+    {
+      "text": "Uses POST /v0/models endpoint",
+      "check": "string_match",
+      "value": "v0/models"
+    },
+    {
+      "text": "Uses ftjob-xyz789:checkpoint_id format for source field",
+      "check": "string_match",
+      "value": "ftjob-xyz789"
+    },
+    {
+      "text": "Retrieves latest checkpoint before deploying",
+      "check": "string_match",
+      "value": "checkpoints"
+    },
+    {
+      "text": "Polls for status == 'active'",
+      "check": "string_match",
+      "value": "active"
+    },
+    {
+      "text": "Shows how to run inference with the deployed model name",
+      "check": "qualitative",
+      "value": "Includes code to call the deployed model via chat completions API"
+    }
+  ]
+}

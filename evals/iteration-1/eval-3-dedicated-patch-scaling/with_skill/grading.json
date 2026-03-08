@@ -1,0 +1,28 @@
+{
+  "eval_id": 3,
+  "eval_name": "dedicated-patch-scaling",
+  "run_type": "with_skill",
+  "expectations": [
+    {
+      "text": "Uses PATCH method (not POST or PUT)",
+      "passed": true,
+      "evidence": "requests.patch(...) used explicitly in Python code and -X PATCH in curl example"
+    },
+    {
+      "text": "Uses correct endpoint URL with the user's endpoint_id ep-xyz789",
+      "passed": true,
+      "evidence": "URL: https://api.tokenfactory.nebius.com/v0/dedicated_endpoints/ep-xyz789 used in both Python and curl"
+    },
+    {
+      "text": "Sets max_replicas to 8",
+      "passed": true,
+      "evidence": "json={\"scaling\": {\"min_replicas\": 1, \"max_replicas\": 8}} in Python; {\"scaling\": {\"max_replicas\": 8}} in curl"
+    },
+    {
+      "text": "Mentions no downtime / live update (doesn't require redeployment)",
+      "passed": true,
+      "evidence": "Key Details table shows Downtime: None and Redeployment: Not required; text says 'live autoscaling updates with zero downtime and no redeployment'"
+    }
+  ],
+  "pass_rate": 1.0
+}

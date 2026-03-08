@@ -1,0 +1,35 @@
+{
+  "eval_id": 6,
+  "eval_name": "deploy-from-job",
+  "run_type": "with_skill",
+  "note": "Skill failed to load — agent could not read skill file. Response is absent.",
+  "skill_loaded": false,
+  "expectations": [
+    {
+      "text": "Uses POST /v0/models endpoint",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Uses ftjob-xyz789 job ID in the source/reference",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Retrieves latest checkpoint before deploying",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Polls for status == 'active'",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    },
+    {
+      "text": "Shows how to run inference with the deployed model name",
+      "passed": false,
+      "evidence": "No response — skill failed to load"
+    }
+  ],
+  "pass_rate": 0.0
+}
