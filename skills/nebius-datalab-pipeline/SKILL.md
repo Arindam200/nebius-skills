@@ -159,6 +159,10 @@ This pipeline combines all Nebius skills. For details on each step:
 | Monitor inference | **nebius-observability** |
 | Dedicated endpoint | **nebius-dedicated-endpoint** |
 
+## Bundled reference
+
+Read `references/datalab-overview.md` when the user asks about DataLab data types, SQL filtering, or the relationship between inference logs and fine-tuning.
+
 ## Reference script
 
 Full 8-step orchestrated pipeline: `scripts/06_datalab_e2e_workflow.py`

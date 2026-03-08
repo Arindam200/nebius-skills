@@ -117,6 +117,10 @@ Once `status=succeeded`, use the checkpoint to:
 - Deploy as a serverless LoRA adapter → see **nebius-deploy-lora** skill
 - Run batch evaluation → see **nebius-batch-synthetic** skill
 
+## Bundled reference
+
+Read `references/api-spec.md` when the user asks about hyperparameter details, API field specs, checkpoint structure, or dataset requirements.
+
 ## Reference script
 
 Full working script: `scripts/01_finetuning.py`

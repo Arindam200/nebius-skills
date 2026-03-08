@@ -105,6 +105,10 @@ requests.delete(
 
 Choose `region` to control where inference runs. Metrics are collected locally but stored in `eu-north1`.
 
+## Bundled reference
+
+Read `references/templates-regions.md` when the user asks about available templates, GPU types, regions, or flavor differences.
+
 ## Reference script
 
 Full working script: `scripts/02_dedicated_endpoints.py`

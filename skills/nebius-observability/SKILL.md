@@ -107,6 +107,10 @@ Or: In Grafana UI → Connections → Add data source → Prometheus → set URL
 
 Metrics are collected in the region where inference runs, but eventually consolidated in `eu-north1`. Use the **Region** filter to compare cross-region endpoints.
 
+## Bundled reference
+
+Read `references/prometheus-grafana.md` when the user asks about Prometheus scrape config, Grafana datasource setup, or alternative monitoring URLs.
+
 ## Reference script
 
 Full working script with PromQL summary + prometheus.yml generator: `scripts/03_observability.py`

@@ -148,6 +148,10 @@ You can have up to 500 batch files. Delete old ones:
 client.files.delete("file_123")
 ```
 
+## Bundled reference
+
+Read `references/batch-format.md` when the user asks about JSONL structure, file limits, or output format.
+
 ## Reference script
 
 Full working script: `scripts/05_batch_inference_synthetic.py`

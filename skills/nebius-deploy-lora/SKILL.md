@@ -124,6 +124,10 @@ for m in r.json().get("data", []):
 requests.delete(f"https://api.tokenfactory.nebius.com/v0/models/{model_name}", headers=headers)
 ```
 
+## Bundled reference
+
+Read `references/deploy-paths.md` when the user asks about deploying from HuggingFace, from a local archive, or the exact `source` field format.
+
 ## Reference script
 
 Full working script: `scripts/04_post_training_deploy.py`
