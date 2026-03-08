@@ -1,15 +1,22 @@
-# Nebius Token Factory — AI Agent Skills
+![asset](./assets/image.png)
 
-A collection of agent skills for [Claude](https://claude.ai) (and compatible AI coding assistants) that cover the full MLOps lifecycle on [Nebius Token Factory](https://tokenfactory.nebius.com) — fine-tuning, deployment, batch inference, and observability.
+# Nebius Token Factory Agent Skills
 
-Each skill is a `SKILL.md` file loaded into an AI agent's context, giving it precise knowledge of Nebius APIs, correct endpoints, and working code patterns.
+A collection of agent skills for [Claude](https://claude.ai) (and compatible AI coding assistants) that cover the full MLOps lifecycle on [Nebius Token Factory](https://tokenfactory.nebius.com) such as fine-tuning, deployment, batch inference, and observability.
+
+## Installation
 
 Run this command to start using the skills:
 
 ```bash
-npx skills add github.com/Arindam200/nebius-skills
+npx skills add Arindam200/nebius-skills
 ```
 
+or, in claude code:
+
+```bash
+/install-skills Arindam200/nebius-skills
+```
 
 ## Skills
 
@@ -25,15 +32,6 @@ npx skills add github.com/Arindam200/nebius-skills
 ---
 
 ## Quickstart
-
-### Install a skill in Cursor
-
-1. Clone this repo:
-   ```bash
-   git clone https://github.com/Arindam200/nebius-skills.git
-   ```
-2. In Cursor, open **Settings → Features → Cursor Skills** and add the path to a `SKILL.md` file — e.g., `nebius-skills/skills/nebius-finetune/SKILL.md`.
-3. The skill is now active. Ask Claude anything about fine-tuning on Nebius and it will automatically load the skill.
 
 ### Use the companion scripts
 
